@@ -16,9 +16,9 @@ panabi = '[{"inputs":[{"internalType":"address","name":"_factory","type":"addres
 
 
 
-sender_address = 'Enter address that holds the token you want to sell'
+sender_address = '0xdCc20789098843025CD54d0799714545d894D85e'
 spend = web3.toChecksumAddress("0xbb4cdb9cbd36b01bd1cbaebf2de08d9173bc095c")
-
+privateKey = 'Enter your privatekey'
 
 
 balance = web3.eth.get_balance(sender_address)
@@ -27,8 +27,6 @@ balance = web3.eth.get_balance(sender_address)
 humanReadable = web3.fromWei(balance,'ether')
 print(humanReadable)
  
-#Contract id is the new token we are swaping to
-#contract_id = web3.toChecksumAddress("0xc9849e6fdb743d08faee3e34dd2d1bc69ea11a51")
 
 contract_id = web3.toChecksumAddress(input("Enter the Contract Address of token you want to sell: "))
  
@@ -65,7 +63,7 @@ approve = sellTokenContract.functions.approve(panRouterContractAddress, balance)
             'nonce': web3.eth.get_transaction_count(sender_address),
             })
 
-signed_txn = web3.eth.account.sign_transaction(approve, private_key='enter your privatekey here')
+signed_txn = web3.eth.account.sign_transaction(approve, private_key=privateKey)
 tx_token = web3.eth.send_raw_transaction(signed_txn.rawTransaction)
 print("Approved: " + web3.toHex(tx_token))
 
@@ -87,6 +85,6 @@ pancakeswap2_txn = contract.functions.swapExactTokensForETHSupportingFeeOnTransf
             'nonce': web3.eth.get_transaction_count(sender_address),
             })
     
-signed_txn = web3.eth.account.sign_transaction(pancakeswap2_txn, private_key='enter your privatekey here')
+signed_txn = web3.eth.account.sign_transaction(pancakeswap2_txn, private_key=privateKey)
 tx_token = web3.eth.send_raw_transaction(signed_txn.rawTransaction)
 print("Sold: " + web3.toHex(tx_token))
