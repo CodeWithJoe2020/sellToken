@@ -43,7 +43,7 @@ name = sellTokenContract.functions.symbol().call()
 #decimals = sellTokenContract.functions.decimals().call()
 
 
-readable = web3.fromWei(balance)
+readable = web3.fromWei(balance, 'ether')
 
 print("Balance: " + str(readable) + " " + name)
 
